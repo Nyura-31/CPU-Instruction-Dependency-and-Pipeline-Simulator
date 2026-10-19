@@ -99,7 +99,7 @@ The timing table is printed by the program and shows each instruction's IF, ID, 
 python -m unittest discover -s tests -v
 ```
 
-The verified suite contains 11 tests for valid and invalid syntax, missing operands and unknown opcodes, register hazards, deterministic ordering, cycle detection, stage progression, dependency stalls, the full sample timing table, performance metrics, and empty input. Expected summary:
+The verified suite contains 13 tests for valid and invalid syntax, missing operands and unknown opcodes, register hazards, deterministic ordering, cycle detection, stage progression, dependency stalls, the full sample timing table, performance metrics, and empty input. Expected summary:
 
 ```text
 Ran 13 tests
