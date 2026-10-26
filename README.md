@@ -132,7 +132,8 @@ The configured GitHub remote is [Nyura-31/CPU-Instruction-Dependency-and-Pipelin
 3. Select the repository, branch, and `app.py` as the main file.
 4. Deploy. Community Cloud installs Streamlit from `requirements.txt`; the sample is loaded relative to `app.py`, so it does not depend on the server's working directory.
 
-No deployed app URL is listed because this project has not been deployed from this workspace.
+Deployed CPU Lab Application Link: 
+https://cpu-lab-instruction-dependency-and-pipeline-simulator.streamlit.app/
 
 ## Limitations
 
