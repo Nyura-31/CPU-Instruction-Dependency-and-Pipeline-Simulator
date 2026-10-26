@@ -1,4 +1,4 @@
-# CPU Instruction Dependency and Pipeline Simulator
+# CPU Lab Instruction Dependency and Pipeline Simulator
 
 A beginner-friendly terminal project that combines three CSE concepts:
 
@@ -6,7 +6,7 @@ A beginner-friendly terminal project that combines three CSE concepts:
 - **DAA:** a register dependency graph is ordered using Kahn's topological sorting algorithm.
 - **COA:** a five-stage CPU pipeline is simulated cycle by cycle, including dependency stalls.
 
-The program uses only the Python standard library.
+The command-line application and core algorithms use only the Python standard library. The optional web dashboard uses Streamlit, listed in `requirements.txt`.
 
 ## How the three subjects connect
 
@@ -21,6 +21,19 @@ python main.py
 ```
 
 Choose `1` to type instructions one per line, ending with a blank line. Choose `2` to run `sample_programs/sample.asm`; choose `3` to exit. The report prints validation results, the adjacency list, the sorted order, a pipeline timing table, and performance metrics. If any instruction is invalid, it reports the DFA errors and stops before scheduling.
+
+## Run the Streamlit dashboard
+
+Create and activate a virtual environment, then install the dashboard dependency:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
+
+The dashboard starts on the Overview page. Use the sidebar to open the Instruction Editor, load the sample, and run analysis. The six pages use the existing validator, dependency graph, Kahn sorter, and pipeline simulator. To use the terminal app instead, continue to run `python main.py`.
 
 ## Instruction language and DFA
 
@@ -85,6 +98,8 @@ The timing table is printed by the program and shows each instruction's IF, ID, 
 
 ## Project files
 
+- `app.py` — Streamlit dashboard entry point and presentation layer.
+- `requirements.txt` — Streamlit dependency for the dashboard.
 - `main.py` — menu, terminal output, and end-to-end workflow.
 - `dfa_validator.py` — instruction model, tokenizer, DFA transitions, and syntax validation.
 - `dependency_graph.py` — register hazards and adjacency-list construction.
@@ -99,12 +114,25 @@ The timing table is printed by the program and shows each instruction's IF, ID, 
 python -m unittest discover -s tests -v
 ```
 
-The verified suite contains 11 tests for valid and invalid syntax, missing operands and unknown opcodes, register hazards, deterministic ordering, cycle detection, stage progression, dependency stalls, the full sample timing table, performance metrics, and empty input. Expected summary:
+The last local verification contains 13 tests for valid and invalid syntax, missing operands and unknown opcodes, register hazards, longest-path ordering and tie-breaking, cycle detection, stage progression, dependency stalls, the full sample timing table, performance metrics, and empty input. Expected summary:
 
 ```text
 Ran 13 tests
 OK
 ```
+
+The web app does not run these tests in the browser. Run the command above locally from the repository directory.
+
+## Deploy to Streamlit Community Cloud
+
+The configured GitHub remote is [Nyura-31/CPU-Instruction-Dependency-and-Pipeline-Simulator](https://github.com/Nyura-31/CPU-Instruction-Dependency-and-Pipeline-Simulator). To deploy:
+
+1. Push the project, including `app.py`, `requirements.txt`, and `sample_programs/sample.asm`, to the GitHub branch you want to deploy.
+2. In Streamlit Community Cloud, create a new app and connect that repository.
+3. Select the repository, branch, and `app.py` as the main file.
+4. Deploy. Community Cloud installs Streamlit from `requirements.txt`; the sample is loaded relative to `app.py`, so it does not depend on the server's working directory.
+
+No deployed app URL is listed because this project has not been deployed from this workspace.
 
 ## Limitations
 
